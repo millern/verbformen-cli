@@ -141,7 +141,7 @@ def test_nouns(
 
 @pytest.mark.parametrize(
     "search,behavior,present,imperfect,perfect,auxiliary_verb,flection,use,level,"
-    "first_definition,separable_stem",
+    "first_definition,separable_prefix,non_separable_prefix",
     [
         (
             "holen",
@@ -154,6 +154,7 @@ def test_nouns(
             "Main",
             Level.A1,
             "take a breath",
+            None,
             None,
         ),
         (
@@ -168,6 +169,7 @@ def test_nouns(
             Level.A1,
             "advise",
             None,
+            None,
         ),
         (
             "lieben",
@@ -180,6 +182,7 @@ def test_nouns(
             "Main",
             Level.A1,
             "love",
+            None,
             None,
         ),
         (
@@ -194,6 +197,7 @@ def test_nouns(
             Level.B1,
             "hit",
             None,
+            None,
         ),
         (
             "essen",
@@ -206,6 +210,7 @@ def test_nouns(
             "Main",
             Level.A1,
             "eat",
+            None,
             None,
         ),
         (
@@ -220,6 +225,7 @@ def test_nouns(
             Level.A1,
             "teleview",
             "fern-",
+            None,
         ),
         (
             "nachschlagen",
@@ -233,6 +239,7 @@ def test_nouns(
             Level.B1,
             "look up",
             "nach-",
+            None,
         ),
         (
             "ausleeren",
@@ -246,6 +253,7 @@ def test_nouns(
             None,
             "empty (out)",
             "aus-",
+            None,
         ),
         (
             "erzählen",
@@ -258,6 +266,7 @@ def test_nouns(
             "Main",
             Level.A1,
             "narrate",
+            None,
             None,
         ),
         (
@@ -272,6 +281,35 @@ def test_nouns(
             Level.B1,
             "fail",
             "durch-",
+            None,
+        ),
+        (
+            "umfassen",
+            "regular",
+            "umfasst",
+            "umfasste",
+            "hat umfasst",
+            "haben",
+            "Active",
+            "Main",
+            Level.B2,
+            "enfold",
+            None,
+            "um-",
+        ),
+        (
+            "umwenden",
+            "irregular",
+            "wendet um",
+            "wandte um",
+            "hat umgewandt",
+            "haben",
+            "Active",
+            "Main",
+            None,
+            "turn",
+            "um-",
+            None,
         ),
     ],
 )
@@ -286,7 +324,8 @@ def test_verbs(
     use,
     level,
     first_definition,
-    separable_stem,
+    separable_prefix,
+    non_separable_prefix,
 ):
     result = download(search)
     assert isinstance(result, Verb)
@@ -301,7 +340,7 @@ def test_verbs(
     assert result.use == use
     assert result.level == level
     assert result.definitions[0] == first_definition
-    assert result.separable_prefix == separable_stem
+    assert result.separable_prefix == separable_prefix
 
 
 @pytest.mark.parametrize(

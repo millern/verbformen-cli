@@ -85,7 +85,8 @@ class Verb(Definition):
     secondary_auxiliary_verb: Optional[str] = Field(example="sein", default=None)
     flection: str = Field(example="Active")
     use: str = Field(example="Main")
-    separable_prefix: str = Field(example="-fern for fernsehen", default=None)
+    separable_prefix: str = Field(example="fern- for fernsehen", default=None)
+    non_separable_prefix: str = Field(example="um- for umfassen", default=None)
 
     conjugations: List[Conjugation] = []
 

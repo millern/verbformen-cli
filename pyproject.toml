@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "verbformen-cli"
-version = "0.2.1"
+version = "0.2.3"
 description = "Verbformen CLI"
 homepage = "https://github.com/millern/verbformen-cli"
 repository = "https://github.com/millern/verbformen-cli"
