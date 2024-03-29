@@ -66,7 +66,7 @@ class VerbformenParser(AbstractParser):
 
     def _not_found(self, soup: BeautifulSoup) -> bool:
         content = soup.find("meta", attrs={"name": "description"})["content"]
-        return "List of all words starting with the text" in content
+        return "German words with" in content
 
     def _parse_part_of_speech(self, soup: BeautifulSoup) -> PartOfSpeech:
         meta = soup.find("meta", attrs={"name": "description"})["content"]
@@ -98,7 +98,7 @@ class VerbformenParser(AbstractParser):
 
     def _extract_noun_data(self, description) -> Dict[str, str]:
         regex = re.match(
-            r"The declension of the noun (?P<text>\S+) is in singular genitive "
+            r"The declension of the noun (?P<text>\S+) (?:\(.*\)) is in singular genitive "
             r"(?P<genitive>\S+) and in the plural nominative (?P<plural>\S+). "
             r"The noun (?P=text) is declined with the declension endings "
             r"(?P<genitive_ending>\S+)/(?P<plural_ending>\S+?). "
@@ -157,7 +157,7 @@ class VerbformenParser(AbstractParser):
 
     def _extract_verb_data(self, description) -> Dict[str, str]:
         regex = re.match(
-            r"^The conjugation of the verb (?P<text>\S+) is (?P<behavior>\S+)\. "
+            r"^The conjugation of the verb (?P<text>\S+) (?:\(.*\)) is (?P<behavior>\S+)\. "
             r"Basic forms are (?P<present>[\S ]+), (?P<imperfect>[\S ]+) and "
             r"(?P<perfect>[\S ]+?)\. "  # non-greedy for optional next line
             r"(?:The stem vowels are ([\S ]+)\. )?"
@@ -188,7 +188,7 @@ class VerbformenParser(AbstractParser):
     def _extract_adjective_data(self, description):
         # incomparable adjectives
         if regex := re.match(
-            r"The declension of the adjective (?P<text>\S+) uses the incomparable form"
+            r"The declension of the adjective (?P<text>\S+) (?:\(.*\)) uses the incomparable form"
             r" (?P=text). "
             r"The adjective has no forms for the comparative and superlative. "
             r"The adjective (?P=text) can be used both attributively in front of a noun"
@@ -201,7 +201,7 @@ class VerbformenParser(AbstractParser):
 
         # comparable adjectives
         if regex := re.match(
-            r"The declension of the adjective (?P<text>\S+) uses these forms of the"
+            r"The declension of the adjective (?P<text>\S+) (?:\(.*\)) uses these forms of the"
             r" comparison (?P=text),(?P<comparative>\S+),(?P<superlative>.+)\. "
             r"The endings for the comparison in the comparative and superlative are"
             r" (?P<comparative_ending>\S+)/(?P<superlative_ending>\S+). "
