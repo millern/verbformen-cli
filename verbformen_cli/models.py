@@ -54,7 +54,7 @@ class Declension(BaseModel):
 
 
 class Noun(Definition):
-    part_of_speech = PartOfSpeech.NOUN
+    part_of_speech: str = PartOfSpeech.NOUN
     genitive: str
     plural: str
     genitive_ending: str
@@ -76,7 +76,7 @@ class Conjugation(BaseModel):
 
 
 class Verb(Definition):
-    part_of_speech = PartOfSpeech.VERB
+    part_of_speech: str = PartOfSpeech.VERB
     behavior: str = Field(example="regular")
     present: str = Field(example="holt")
     imperfect: str = Field(example="holte")
@@ -92,7 +92,7 @@ class Verb(Definition):
 
 
 class Adjective(Definition):
-    part_of_speech = PartOfSpeech.ADJECTIVE
+    part_of_speech: str = PartOfSpeech.ADJECTIVE
     is_comparable: bool
     comparative: Optional[str] = None
     superlative: Optional[str] = None

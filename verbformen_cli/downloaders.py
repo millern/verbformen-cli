@@ -30,13 +30,13 @@ class CachedDownloader(AbstractDownloader):
         self.delegate = delegate
         self.cache_dir = cache_path
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-
+    
     def download(self, url: str) -> str:
         path = self.cache_dir / urllib.parse.quote(url, safe="")
         if not path.is_file():
             page = self.delegate.download(url)
-            path.write_text(page)
-        return path.read_text()
+            path.write_text(page, encoding="UTF-8")
+        return path.read_text(encoding="UTF-8")
 
 
 def create_search_url(german_word: str, part_of_speech: PartOfSpeech = None) -> str:
